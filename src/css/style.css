@@ -49,11 +49,15 @@ body::before {
 
 .my1x1 {
   position: absolute;
-  top: 12vh; 
+  margin: 0 auto;
+  top: 12vh;
   right: 5vw;
-  width: 45vw;
+  width: clamp(300px, 45vw, 1000px);  
   height: 89vh;
+  display: flex;
+  box-sizing: border-box;
 }
+
 
 
 .layer-blur {
@@ -150,6 +154,7 @@ main {
   animation: animationGradient 2.5s linear infinite;
   box-shadow: 0 0 15px white;
   text-transform: uppercase;
+  display: flex;
 }
 
 .introducing-tag-box .intro-tag{
@@ -190,11 +195,12 @@ main {
 
 .content h1 {
   font-size: clamp(2rem, 4vw, 4rem);
-  font-weight: 600;
+  font-weight: bolder;
   letter-spacing: 0.1em;
   margin: 2rem 0;
   line-height: 1.2;
   text-shadow: 0 0 10px rgba(128, 128, 128, 0.42);
+
 }
 
 .description {
@@ -260,8 +266,8 @@ main {
 }
 
 #container3D canvas {
-  margin-top: -12%;
-  margin-right: 22%;
+  margin-top: -15%;
+  margin-right: 20%;
 }
 
 .my-experties-content {
@@ -278,16 +284,13 @@ main {
 
 }
 
-.content h1{
-  font-size: clamp(2rem, 4vw, 100rem);
-  font-weight: bolder;
-}
+
 .my-expertise {
-  position: absolute;
-  top: 103vh;
-  left: 32vw;
+  position: relative;
+  right: 5vh;
+  bottom: 20vh;
   font-weight: 700;
-  font-size: clamp(1.2rem, 2vw, 2rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   text-align: center;
   justify-content: center;
 }
@@ -295,7 +298,7 @@ main {
 .my-expertise-sub {
   position: absolute;
   top: 115vh;
-  left: 28vw;
+  left: 27.5vw;
   transform: translate(100%, 60%);
   font-weight: 400;
   font-size: 50;
@@ -304,18 +307,12 @@ main {
   color: #90ee90;
 }
 
-
-
 .description-overlay {
-  position: absolute;
-  bottom: 35vh;
-  left: 48vw;
-  transform: translateX(-50%);
+  position: flex;
   text-align: center;
+  margin-top: -40rem;
   color: white;
   z-index: 1;
-  padding: 1rem;
-  max-width: 90vw;
   border-radius: 1rem;
   backdrop-filter: blur(3px);
   user-select: none;
@@ -338,12 +335,44 @@ main {
 }
 
 
-.myproj-container{
+.my-proj-container{
   margin-top: 30%;
 }
 /*POP UP NIGGA*/
 
 /*Containers*/
+.my-proj-box {
+  
+  margin-top: 3vh;
+  display: flex;
+  color: #c0c0c0;
+  position: relative;
+  width: 10vw;
+  height: 2.5rem;
+  border-radius: 50px;
+  background: linear-gradient(to right, #656565, #90ee90, #48ad48, #249624, #757575, #656565);
+  background-size: 200%;
+  animation: animationGradient 2.5s linear infinite;
+  box-shadow: 0 0 15px white;
+  text-transform: uppercase;
+}
+
+.my-proj-box .my-proj{
+  position: absolute;
+  inset: 3px 3px 3px 3px;
+  background-color: black;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+}
+
+.my-proj-text {
+  display: flex;
+  border: none;   
+  width: 82vw;
+}
 
 .mc-container {
   margin-top: 10vh;
@@ -428,6 +457,7 @@ main {
   opacity: 1;
   transform: translateX(20px); 
 }
+
 
 
 /*ANIMATIONS NIGGA*/

@@ -19,7 +19,6 @@ function App() {
 
       {/* Main container NIGGA */}
       <div className="container">
-        <img className="image-gradient" src={gradient} alt="gradient background" />
 
         <div className="layer-blur"></div>
         <div className="my1x1-box">
@@ -33,7 +32,7 @@ function App() {
           <section className="content">
             <div className="tags-container">
               <div className="introducing-tag-box">
-                <div className="intro-tag">Introducing</div>
+                <div className="intro-tag">About Me</div>
               </div>
             </div>
 
@@ -47,7 +46,12 @@ function App() {
               <div className="circle-blur"></div>
             </div>
 
-              <div className="myproj-container">
+              <div className="my-proj-container">
+                <div className="my-proj-box">
+                  <div className="my-proj">My Projects</div>
+                </div>
+                <div className="my-proj-text">Throughout my journey in computer engineering, I have undertaken a variety of projects that span personal hobbies, commissioned work, and academic assignments.These projects reflect my passion for technology and innovation, as well as the practical skills and experience I have gained by working on real-world challenges, 
+                    collaborating with others, and continuously pushing myself to learn and grow.</div>
                 <MCProjPic />
               </div>
 

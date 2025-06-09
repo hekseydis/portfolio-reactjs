@@ -10,7 +10,7 @@ export default function MCProjPic() {
 
   return (
     <section>
-      <h1 className="my-proj">My Projects</h1>
+      
       <div className="mc-container">
         
         <header className="mc-header">Microcontrollers</header>
