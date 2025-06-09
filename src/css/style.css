@@ -318,7 +318,6 @@ main {
   user-select: none;
 }
 
-/* Model NIGGA */
 .model-title {
   font-size: clamp(2rem, 5vw, 4rem);        
   text-decoration: underline;
@@ -338,8 +337,6 @@ main {
 .my-proj-container{
   margin-top: 30%;
 }
-/*POP UP NIGGA*/
-
 /*Containers*/
 .my-proj-box {
   
@@ -460,7 +457,6 @@ main {
 
 
 
-/*ANIMATIONS NIGGA*/
 .slide-left {
   animation: slideLeft 1.5s ease forwards;
 }

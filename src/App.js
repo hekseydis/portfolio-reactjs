@@ -14,10 +14,7 @@ import my1x1 from './assets/my1x1.png';
 function App() {
   return (
     <>
-      {/* IMAGES NIGGA*/}
 
-
-      {/* Main container NIGGA */}
       <div className="container">
 
         <div className="layer-blur"></div>
@@ -39,8 +36,6 @@ function App() {
             <DescText />
 
       <div className="my-sep-line"></div>
-
-          {/* ThreeJS NIGGA */}
             <div>
               <ExpText />
               <div className="circle-blur"></div>
