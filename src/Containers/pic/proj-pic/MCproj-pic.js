@@ -10,10 +10,12 @@ export default function MCProjPic() {
 
   return (
     <section>
-      
+
+      <div className="mc-header-box">
+        <div className="mc-header">Microcontrollers</div>
+      </div>
       <div className="mc-container">
         
-        <header className="mc-header">Microcontrollers</header>
 
         <div className="mc-container-pic">
           <div
@@ -28,7 +30,7 @@ export default function MCProjPic() {
             text={
               <>
                 <h2 className="mctitle">Automated Garage Door:</h2>
-                A personal hobby project focused on designing and building a small-scale prototype of an automated garage door system. Utilized a servo motor to control the opening and 
+                A commision project focused on designing and building a small-scale prototype of an automated garage door system. Utilized a servo motor to control the opening and 
                 closing mechanism of the door, while an ultrasonic sensor was integrated to detect approaching objects or vehicles.
               </> 
             }
@@ -47,7 +49,7 @@ export default function MCProjPic() {
             text={
               <>
                 <h2 className="mctitle">DIY Fire Alarm:</h2>
-                A personal hobby project focused on designing a system that continuously measures ambient temperature and humidity levels, displaying real-time data through a 
+                A commision hobby project focused on designing a system that continuously measures ambient temperature and humidity levels, displaying real-time data through a 
                 custom-built software interface.An integrated alarm system activates when readings exceed predefined thresholds.
               </> 
             }
@@ -64,9 +66,8 @@ export default function MCProjPic() {
             <MCProjText isVisible={hovered === "mc3"}
             text={
               <>
-                <h2 className="mctitle">DIY Fire Alarm:</h2>
-                A personal hobby project focused on designing a system that continuously measures ambient temperature and humidity levels, displaying real-time data through a 
-                custom-built software interface.An integrated alarm system activates when readings exceed predefined thresholds.
+                <h2 className="mctitle">Data Output Transfer:</h2>
+                A personal hobby project focused on utilizing the ESP32 microcontroller for efficient data output transfer. The objective was to collect data, process it locally on the ESP32, and communicate the output to each other.
               </> 
             }
             />

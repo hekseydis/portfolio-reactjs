@@ -287,8 +287,8 @@ main {
 
 .my-expertise {
   position: relative;
-  right: 5vh;
-  bottom: 20vh;
+  right: 0vh;
+  bottom: 20vh; 
   font-weight: 700;
   font-size: clamp(2rem, 4vw, 3rem);
   text-align: center;
@@ -297,8 +297,8 @@ main {
 
 .my-expertise-sub {
   position: absolute;
-  top: 115vh;
-  left: 27.5vw;
+  top: 110vh;
+  left: 30vw;
   transform: translate(100%, 60%);
   font-weight: 400;
   font-size: 50;
@@ -333,37 +333,20 @@ main {
   text-align: center;
 }
 
+.my-proj{
 
+  position: relative;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  justify-content: center;
+  left: 22rem;
+}
 .my-proj-container{
   margin-top: 30%;
 }
 /*Containers*/
-.my-proj-box {
   
-  margin-top: 3vh;
-  display: flex;
-  color: #c0c0c0;
-  position: relative;
-  width: 10vw;
-  height: 2.5rem;
-  border-radius: 50px;
-  background: linear-gradient(to right, #656565, #90ee90, #48ad48, #249624, #757575, #656565);
-  background-size: 200%;
-  animation: animationGradient 2.5s linear infinite;
-  box-shadow: 0 0 15px white;
-  text-transform: uppercase;
-}
-
-.my-proj-box .my-proj{
-  position: absolute;
-  inset: 3px 3px 3px 3px;
-  background-color: black;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.5s ease;
-}
 
 .my-proj-text {
   display: flex;
@@ -374,28 +357,44 @@ main {
 .mc-container {
   margin-top: 10vh;
   background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(59, 59, 59, 0.7));
+    linear-gradient(to top, rgba(134, 155, 141, 0.5), rgba(0, 0, 0, 0.5)),
+    radial-gradient(circle at center, rgb(3, 49, 5), rgba(0, 0, 0, 1));
 
   position: absolute;
   width: 25vw;   
   height: 80vh;   
   border-radius: 14px;
-  box-shadow: 10px 0 20px -5px #000000;
+  box-shadow: 30px 50px 40px -10px #000000;
   transition: transform 0.3s ease;
   z-index: -2;
 }
 
-.mc-header {
-  width: 100%;
-  background: linear-gradient(to bottom, #02300d, #156d1d);
-  text-align: center;
-  justify-content: center;
-  font-weight: bolder;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  padding: 0.5rem 0;
+.mc-header-box {
+  margin-top: 3vh;
+  color: #c0c0c0;
+  position: relative;
+  width: 10vw;
+  height: 2.5rem;
+  border-radius: 50px;
+  background: linear-gradient(to right, #656565, #90ee90, #48ad48, #249624, #757575, #656565);
+  background-size: 200%;
+  animation: animationGradient 2.5s linear infinite;
+  box-shadow: 0 0 15px white;
+  text-transform: uppercase;
+  display: flex;
 }
 
+
+.mc-header-box .mc-header{
+  position: absolute;
+  inset: 3px 3px 3px 3px;
+  background-color: black;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+}
 /*Animation or sumtin*/
 .mc-text {
   position: absolute;
