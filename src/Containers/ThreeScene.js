@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
+
+
 const modelStates = [
   {
     title: "Cybersecurity",
@@ -25,12 +27,11 @@ const modelStates = [
   },
 ];
 
-export default function ThreeScene() {
+export default function ThreeScene({ onShowMCProject, onShowRoboProject }) {
   const containerRef = useRef();
   const descriptionRef = useRef();
 
   useEffect(() => {
-    // Clean previous canvas if any
     if (containerRef.current.children.length > 0) {
       containerRef.current.innerHTML = "";
     }
@@ -48,7 +49,6 @@ export default function ThreeScene() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Lights
     scene.add(new THREE.AmbientLight(0xffffff, 0.4));
     const lights = [
       [50, 100, 50, 0.8],
@@ -68,35 +68,14 @@ export default function ThreeScene() {
       "/models/dino/eeee.glb",
       (gltf) => {
         object = gltf.scene;
-        scene.add(object);
 
-        // Add mousemove listener only AFTER model loaded
-        renderer.domElement.addEventListener("mousemove", onMouseMove);
+        object.scale.set(1, 1, 1);
+
+        scene.add(object);
       },
       undefined,
       (error) => console.error("GLTF error:", error)
     );
-
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    function onMouseMove(event) {
-      if (!object) return;
-
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, camera);
-
-      // Recursively check all child meshes for intersection
-      const intersects = raycaster.intersectObjects(object.children, true);
-
-      if (intersects.length > 0) {
-        renderer.domElement.style.cursor = "pointer";
-      } else {
-        renderer.domElement.style.cursor = "default";
-      }
-    }
 
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -113,6 +92,12 @@ export default function ThreeScene() {
     const updateDescription = (direction = "left") => {
       const state = modelStates[currentStateIndex];
       const container = descriptionRef.current;
+      if (state.title === "Micro Controllers" && onShowMCProject) {
+      onShowMCProject(); 
+    } else if (state.title == "Automation and Robotics  " && onShowRoboProject){
+      onShowRoboProject();
+    }
+
       container.innerHTML = `
         <h3 class="model-title ${
           direction === "right" ? "slide-right" : "slide-left"
@@ -134,7 +119,19 @@ export default function ThreeScene() {
         const direction = deltaX > 0 ? "right" : "left";
         currentStateIndex = index;
         updateDescription(direction);
+
+        // Store "where we are now" type shii
+        if (modelStates[index].title === "Micro Controllers" && typeof onShowMCProject === 'function') {
+          onShowMCProject();
+        } else if ((modelStates[index].title === "Automation and Robotics" && typeof onShowRoboProject === 'function')){
+          onShowRoboProject();
+        } else if ((modelStates[index].title === "FrontEnd Development" && typeof onShowRoboProject === 'function')){
+          onShowFDProject();
+        } else if ((modelStates[index].title === "Cybersecurity" && typeof onShowRoboProject === 'function')){
+          onShowCysecProject();
+        }
       }
+
     };
 
     const onMouseDown = (e) => {
@@ -148,13 +145,11 @@ export default function ThreeScene() {
       previousMouseX = e.clientX;
     };
 
-    // Add drag listeners on renderer.domElement
     renderer.domElement.addEventListener("mousedown", onMouseDown);
     renderer.domElement.addEventListener("mouseup", onMouseUp);
     renderer.domElement.addEventListener("mouseleave", onMouseUp);
     renderer.domElement.addEventListener("mousemove", onMouseMoveDrag);
 
-    // Touch events for mobile
     renderer.domElement.addEventListener("touchstart", (e) => {
       if (e.touches.length === 1) {
         isDragging = true;
@@ -179,7 +174,6 @@ export default function ThreeScene() {
     return () => {
       window.removeEventListener("resize", onResize);
       if (renderer.domElement) {
-        renderer.domElement.removeEventListener("mousemove", onMouseMove);
         renderer.domElement.removeEventListener("mousedown", onMouseDown);
         renderer.domElement.removeEventListener("mouseup", onMouseUp);
         renderer.domElement.removeEventListener("mouseleave", onMouseUp);
@@ -187,24 +181,22 @@ export default function ThreeScene() {
         renderer.domElement.removeEventListener("touchstart", () => {});
         renderer.domElement.removeEventListener("touchmove", () => {});
         renderer.domElement.removeEventListener("touchend", () => {});
-        renderer.domElement.remove(); // Remove canvas from DOM
+        renderer.domElement.remove();
       }
-      renderer.dispose(); // Clean up memory
+      renderer.dispose();
     };
   }, []);
 
+
+//MCPROJECT
+
+
   return (
-    <div>
-      <div
-        ref={containerRef}
-        id="container3D"
-        style={{ width: "100vw", height: "100vh" }}
-      />
-      <div
-        ref={descriptionRef}
-        id="modelDescription"
-        className="description-overlay"
-      />
+    <div className="contents-proj-exp">
+      <div className="content-3D">
+        <div ref={containerRef} className="model-overlay" />
+        <div ref={descriptionRef} id="modelDescription" className="description-overlay" />
+      </div>
     </div>
   );
 }
