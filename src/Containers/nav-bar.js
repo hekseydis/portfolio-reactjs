@@ -7,10 +7,9 @@ export default function Navbar() {
     <header className="nav-bar-container">
       <h1 className="nav-bar-main">MY PORTFOLIO</h1>
       <nav className="nav-bar-a-group">
-        <a href="#">About Me</a>
-        <a href="#">My Expertise</a>
-        <a href="#">Projects</a>
-        <a href="#">Achievements</a>
+        <a href="#about">About Me</a>
+        <a href="#expertise&projects">Projects & Expertise</a>
+        <a href="#achievement">Achievements</a>
       </nav>
     </header>
   );

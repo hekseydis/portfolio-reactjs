@@ -16,10 +16,10 @@ export default function DescText() {
         </p>
         <div className="buttons">
                 <a href="#" className="btn-get-started">
-                  Resume &gt;
+                  Resume 
                 </a>
                 <a href="#" className="btn-signing-main">
-                  Get started &gt;
+                  Get started 
                 </a>
               </div>
     </section>

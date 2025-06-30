@@ -4,7 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const modelStates = [
   {
-    title: "Cybersecurity",
+    title: "Game Development",
     description:
       "Intermediate knowledge in network protection, encryption methods, and basic threat detection techniques. Continuing to build practical experience securing systems.",
   },
@@ -19,18 +19,19 @@ const modelStates = [
       "Has a solid intermediate foundation in robotics by applying automation techniques, programming robotic controllers, and working with sensors to execute precise tasks.",
   },
   {
-    title: "Micro Controllers",
+    title: "MicroControllers",
     description:
       "Capable of programming microcontrollers for real-time tasks, integrating basic sensors and actuators. Actively developing projects to improve embedded system skills.",
   },
 ];
 
-export default function ThreeScene() {
+export default function ThreeScene({ onShowMCProject, onShowRoboProject, onShowFDProject, onShowGDProject }) {
   const containerRef = useRef();
   const descriptionRef = useRef();
+  const DevScrollRef = useRef(); 
+  const hasInteracted = useRef(false);
 
   useEffect(() => {
-    // Clean previous canvas if any
     if (containerRef.current.children.length > 0) {
       containerRef.current.innerHTML = "";
     }
@@ -48,7 +49,6 @@ export default function ThreeScene() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Lights
     scene.add(new THREE.AmbientLight(0xffffff, 0.4));
     const lights = [
       [50, 100, 50, 0.8],
@@ -65,38 +65,22 @@ export default function ThreeScene() {
     let object = null;
     const loader = new GLTFLoader();
     loader.load(
-      "/models/dino/eeee.glb",
-      (gltf) => {
-        object = gltf.scene;
-        scene.add(object);
+    "/models/dino/eeee.glb",
+    (gltf) => {
+      object = gltf.scene;
 
-        // Add mousemove listener only AFTER model loaded
-        renderer.domElement.addEventListener("mousemove", onMouseMove);
-      },
-      undefined,
-      (error) => console.error("GLTF error:", error)
-    );
+      object.scale.set(1, 1, 1);
 
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+      object.rotation.y = Math.PI / 50;
+      object.rotation.x = 0;           
+      object.rotation.z = 0;
 
-    function onMouseMove(event) {
-      if (!object) return;
+      scene.add(object);
+    },
+    undefined,
+    (error) => console.error("GLTF error:", error)
+  );
 
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      raycaster.setFromCamera(mouse, camera);
-
-      // Recursively check all child meshes for intersection
-      const intersects = raycaster.intersectObjects(object.children, true);
-
-      if (intersects.length > 0) {
-        renderer.domElement.style.cursor = "pointer";
-      } else {
-        renderer.domElement.style.cursor = "default";
-      }
-    }
 
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -110,32 +94,52 @@ export default function ThreeScene() {
     let accumulatedRotation = 0;
     let currentStateIndex = 0;
 
+    const scrollTo = () => {
+      if (DevScrollRef.current) {
+        DevScrollRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+
+    
     const updateDescription = (direction = "left") => {
       const state = modelStates[currentStateIndex];
       const container = descriptionRef.current;
+
+      
+      if (state.title === "MicroControllers" && typeof onShowMCProject === "function") {
+        onShowMCProject();
+      } else if (state.title === "Automation and Robotics" && typeof onShowRoboProject === "function") {
+        onShowRoboProject();
+        if (hasInteracted.current) scrollTo();
+      } else if (state.title === "FrontEnd Development" && typeof onShowFDProject === "function") {
+        onShowFDProject();
+      } else if (state.title === "Game Development" && typeof onShowGDProject === "function") {
+        onShowGDProject();
+        if (hasInteracted.current) scrollTo();
+      }
+
       container.innerHTML = `
-        <h3 class="model-title ${
-          direction === "right" ? "slide-right" : "slide-left"
-        }">${state.title}</h3>
+        <h3 class="model-title ${direction === "right" ? "slide-right" : "slide-left"}">${state.title}</h3>
         <p class="model-description">${state.description}</p>
       `;
     };
-
+    
     const handleInteraction = (deltaX) => {
-      if (!object) return;
-      const speed = 0.005;
-      object.rotation.y += deltaX * speed;
-      accumulatedRotation = (accumulatedRotation + deltaX * speed) % (2 * Math.PI);
+    hasInteracted.current = true; 
+    if (!object) return;
+    const speed = 0.005;
+    object.rotation.y += deltaX * speed;
+    accumulatedRotation = (accumulatedRotation + deltaX * speed) % (2 * Math.PI);
 
-      let index = Math.round(accumulatedRotation / (Math.PI / 2));
-      index = (index + modelStates.length) % modelStates.length;
+    let index = Math.round(accumulatedRotation / (Math.PI / 2));
+    index = (index + modelStates.length) % modelStates.length;
 
-      if (index !== currentStateIndex) {
-        const direction = deltaX > 0 ? "right" : "left";
-        currentStateIndex = index;
-        updateDescription(direction);
-      }
-    };
+    if (index !== currentStateIndex) {
+      const direction = deltaX > 0 ? "right" : "left";
+      currentStateIndex = index;
+      updateDescription(direction);
+    }
+  };
 
     const onMouseDown = (e) => {
       isDragging = true;
@@ -148,13 +152,11 @@ export default function ThreeScene() {
       previousMouseX = e.clientX;
     };
 
-    // Add drag listeners on renderer.domElement
     renderer.domElement.addEventListener("mousedown", onMouseDown);
     renderer.domElement.addEventListener("mouseup", onMouseUp);
     renderer.domElement.addEventListener("mouseleave", onMouseUp);
     renderer.domElement.addEventListener("mousemove", onMouseMoveDrag);
 
-    // Touch events for mobile
     renderer.domElement.addEventListener("touchstart", (e) => {
       if (e.touches.length === 1) {
         isDragging = true;
@@ -178,33 +180,21 @@ export default function ThreeScene() {
 
     return () => {
       window.removeEventListener("resize", onResize);
-      if (renderer.domElement) {
-        renderer.domElement.removeEventListener("mousemove", onMouseMove);
-        renderer.domElement.removeEventListener("mousedown", onMouseDown);
-        renderer.domElement.removeEventListener("mouseup", onMouseUp);
-        renderer.domElement.removeEventListener("mouseleave", onMouseUp);
-        renderer.domElement.removeEventListener("mousemove", onMouseMoveDrag);
-        renderer.domElement.removeEventListener("touchstart", () => {});
-        renderer.domElement.removeEventListener("touchmove", () => {});
-        renderer.domElement.removeEventListener("touchend", () => {});
-        renderer.domElement.remove(); // Remove canvas from DOM
-      }
-      renderer.dispose(); // Clean up memory
+      renderer.dispose();
     };
   }, []);
 
   return (
-    <div>
-      <div
-        ref={containerRef}
-        id="container3D"
-        style={{ width: "100vw", height: "100vh" }}
-      />
-      <div
-        ref={descriptionRef}
-        id="modelDescription"
-        className="description-overlay"
-      />
-    </div>
+    <>
+      <div className="contents-proj-exp">
+        <div className="content-3D">
+          <div ref={containerRef} className="model-overlay" />
+          <div ref={descriptionRef} id="modelDescription" className="description-overlay" />
+        </div>
+      </div>
+
+      {/* 👇 Invisible div where we scroll to */}
+      <div ref={DevScrollRef} style={{ height: "1px" }}></div>
+    </>
   );
 }

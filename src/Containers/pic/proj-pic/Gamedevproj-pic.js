@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import '../../../css/style.css';
-import proj1 from '../../../assets/proj-pics/RB1.jpg';
-import proj2 from '../../../assets/proj-pics/RB2.jpg';
-import proj3 from '../../../assets/proj-pics/RB3.jpg';
-import proj4 from '../../../assets/proj-pics/RB4.jpg';
+import proj1 from '../../../assets/proj-pics/GD1.png';
+import proj2 from '../../../assets/proj-pics/GD2.png';
+import proj3 from '../../../assets/proj-pics/GD3.jpg';
+import proj4 from '../../../assets/proj-pics/GD4.png';
 import ProjText from "../../text/proj-text/proj-text";
 
-export default function RBProjPic() {
+export default function GDProjPic() {
   const [fullscreenImg, setFullscreenImg] = useState(null);
 
   const openFullscreen = (img) => {
@@ -34,8 +34,8 @@ export default function RBProjPic() {
               isVisible={true}
               text={
                 <>
-                  <h2 className="projtitle">Object avoiding Robot:</h2>
-                  A hobby/school project involving an obstacle avoiding robot with three HC-SR04 ultrasonic sensors (front, left, right) for obstacle detection and autonomous navigation with L298n as its motors driver. Built using Arduino, with programmed logic for avoiding obstacles and navigating safely.
+                  <h2 className="projtitle">Sanrio x Stardew Valley:</h2>
+                  A hobby project developed using C++ and Unity, blending the charm of Sanrio characters with the gameplay mechanics of Stardew Valley. Players grow plants to earn gold, which can be exchanged for equipment and upgrades, combining cozy farming with light adventure elements.
                 </>
               }
             />
@@ -53,8 +53,8 @@ export default function RBProjPic() {
               isVisible={true}
               text={
                 <>
-                  <h2 className="projtitle">Gesture Controlled Robot:</h2>
-                  A hobby project involving building a robot model using an ESP32 Wifi microcontroller, controlled via a custom OpenCV-based gesture detection system. Hand gestures are used as control inputs—left hand movements control steering (left or right), while right hand movements control forward motions.
+                  <h2 className="projtitle">Sekiro Inspired Combat System:</h2>
+                  A hobby project involving technical prototype built with C++ and Unreal Engine 5, aiming to replicate the intense, precise combat mechanics of *Sekiro: Shadows Die Twice*. This system is designed as a foundation for future action game projects.
                 </>
               }
             />
@@ -72,13 +72,12 @@ export default function RBProjPic() {
               isVisible={true}
               text={
                 <>
-                  <h2 className="projtitle">Sumo bot:</h2>
-                  A hobby project focused on building a sumobot using a 3-channel line tracking sensor paired with ultrasonic sensor setup for object detection, using Arduino and L298n as its motor driver. The objective was to detect and push opposing objects off a designated ring, with the ring’s floor blacked and edges whiten out to help the IR sensors recognize boundaries and prevent the robot from exiting the arena.
+                  <h2 className="projtitle">Aottg 2</h2>
+                  A community-driven project to revive *Attack on Titan Tribute Game* (AOTTG), a fan-made multiplayer game. I contributed as both animator and programmer over a 6-month period, helping bring the game’s visuals and mechanics to life.
                 </>
               }
             />
           </div>
-
           <div className="proj4-wrapper" style={{ position: "relative" }}>
             <img
               id="proj4-pic"
@@ -91,8 +90,8 @@ export default function RBProjPic() {
               isVisible={true}
               text={
                 <>
-                  <h2 className="projtitle">Object Avoiding Robot v2:</h2>
-                  A hobby/school project involving an obstacle-avoiding robot using a single HC-SR04 ultrasonic sensor mounted on a servo motor to scan multiple directions for obstacle detection. Controlled by an Arduino and L293D motor driver.
+                  <h2 className="projtitle">Precise Movement</h2>
+                 A hobby project involving technical prototype built using C++ and Unreal Engine 5, aiming to create smooth and interactive movement consisting of stealth movement, collision and dynamic parkour system.
                 </>
               }
             />
